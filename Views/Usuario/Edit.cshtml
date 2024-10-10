@@ -1,0 +1,51 @@
+﻿@model PruebaTecnica.Models.Usuario
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editar Usuario</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Identificador)
+        @Html.HiddenFor(model => model.HashIV)
+        @Html.HiddenFor(model => model.HashKey)
+        @Html.HiddenFor(model => model.Pass)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UsuarioNombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UsuarioNombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UsuarioNombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NuevaContrasena, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NuevaContrasena, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NuevaContrasena, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="row mb-3 d-flex justify-content-center">
+            <div class="col-auto">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+            <div class="col-auto">
+                @Html.ActionLink("Cancelar", "Index", "Usuario", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
